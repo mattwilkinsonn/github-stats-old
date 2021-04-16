@@ -1,1 +1,2 @@
 EXCLUDED_LANGS=C#,ShaderLab,Kotlin,Mask,HLSL,Mako,Less
+EXCLUDED=rust,rustlings,ant-design
