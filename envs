@@ -1,2 +1,2 @@
 EXCLUDED_LANGS=C#,ShaderLab,Kotlin,Mask,HLSL,Mako,Less
-EXCLUDED=rust,rustlings,ant-design,gitbeaker,react-query,prisma-examples
+EXCLUDED=rust,rustlings,ant-design,gitbeaker,react-query,prisma-examples,StarshipDownLyra
