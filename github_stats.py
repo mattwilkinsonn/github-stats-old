@@ -315,16 +315,14 @@ Languages:
             repos = owned_repos.get("nodes", [])
             if not self._ignore_forked_repos:
                 repos += contrib_repos.get("nodes", [])
-                
-            print(repos)
 
             for repo in repos:
                 if repo is None:
                     continue
-                name = repo.get("nameWithOwner")
-                if name in self._repos or name in self._exclude_repos:
+                repo_name = repo.get("nameWithOwner")
+                if repo_name in self._repos or repo_name in self._exclude_repos:
                     continue
-                self._repos.add(name)
+                self._repos.add(repo_name)
                 self._stargazers += repo.get("stargazers").get("totalCount", 0)
                 self._forks += repo.get("forkCount", 0)
 
@@ -332,6 +330,7 @@ Languages:
                     name = lang.get("node", {}).get("name", "Other")
                     languages = await self.languages
                     if name in self._exclude_langs: continue
+                    print(f"repo: {repo_name}, lang: {name}, size: {lang.get("size", 0)}")
                     if name in languages:
                         languages[name]["size"] += lang.get("size", 0)
                         languages[name]["occurrences"] += 1
