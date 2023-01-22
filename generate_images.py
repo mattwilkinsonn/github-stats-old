@@ -100,7 +100,7 @@ async def main() -> None:
         raise Exception("A personal access token is required to proceed!")
     user = os.getenv("GITHUB_ACTOR")
     exclude_repos = os.getenv("EXCLUDED")
-    exclude_repos = ({x.strip() for x in exclude_repos.split(",")}
+    exclude_repos = ({x.strip().lower() for x in exclude_repos.split(",")}
                      if exclude_repos else None)
     exclude_langs = os.getenv("EXCLUDED_LANGS")
     exclude_langs = ({x.strip() for x in exclude_langs.split(",")}
