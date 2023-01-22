@@ -320,23 +320,24 @@ Languages:
                 if repo is None:
                     continue
                 repo_name = repo.get("nameWithOwner")
-                if repo_name in self._repos or repo_name in self._exclude_repos:
+                if repo_name in self._repos or repo_name.lower() in self._exclude_repos:
                     continue
                 self._repos.add(repo_name)
                 self._stargazers += repo.get("stargazers").get("totalCount", 0)
                 self._forks += repo.get("forkCount", 0)
 
                 for lang in repo.get("languages", {}).get("edges", []):
-                    name = lang.get("node", {}).get("name", "Other")
+                    lang_name = lang.get("node", {}).get("name", "Other")
                     languages = await self.languages
-                    if name in self._exclude_langs: continue
-                    print(f"repo: {repo_name}, lang: {name}, size: {lang.get("size", 0)}")
+                    if lang_name.lower() in self._exclude_langs: continue
+                    lang_size = lang.get("size", 0)
+                    print(f"repo: {repo_name}, lang: {lang_name}, size: {lang_size}")
                     if name in languages:
-                        languages[name]["size"] += lang.get("size", 0)
-                        languages[name]["occurrences"] += 1
+                        languages[lang_name]["size"] += lang_size
+                        languages[lang_name]["occurrences"] += 1
                     else:
-                        languages[name] = {
-                            "size": lang.get("size", 0),
+                        languages[lang_name] = {
+                            "size": lang_size,
                             "occurrences": 1,
                             "color": lang.get("node", {}).get("color")
                         }
