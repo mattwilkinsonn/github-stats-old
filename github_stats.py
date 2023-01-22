@@ -332,7 +332,7 @@ Languages:
                     if lang_name.lower() in self._exclude_langs: continue
                     lang_size = lang.get("size", 0)
                     print(f"repo: {repo_name}, lang: {lang_name}, size: {lang_size}")
-                    if name in languages:
+                    if lang_name in languages:
                         languages[lang_name]["size"] += lang_size
                         languages[lang_name]["occurrences"] += 1
                     else:
